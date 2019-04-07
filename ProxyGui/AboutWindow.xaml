@@ -1,0 +1,50 @@
+<Window x:Class="ProxyGui.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sobre Interface de Proxy" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
+        ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+        </Grid.ColumnDefinitions>
+        
+        <Border Grid.Row="0" Height="188" Width="331" BorderBrush="Black" BorderThickness="2" >
+            <Image Source="{StaticResource Logo}" />
+        </Border>
+        
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Nome:</Label>
+            <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Content="Interface de Proxy" Name="LabelNome"/>
+            
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">Autor:</Label>
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Content="Alejandro Boidi Rico" Name="LabelAutor"/>
+
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">Versão:</Label>
+            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Content="1.5" Name="LabelVersao"/>
+
+            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center">Descrição:</Label>
+            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Name="LabelDesc" Width="400">
+                Gerenciador de Proxy para FATEC Arthur de Azevedo.<LineBreak/>
+                Contato: alejandro.rico@gmail.com
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>

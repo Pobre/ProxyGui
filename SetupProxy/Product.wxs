@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="FatecProxy" Codepage="1252" Language="1033" Version="1.4" Manufacturer="Pobre Development" UpgradeCode="8582f739-0735-4b72-96ed-283a0635a6bc">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		
+		<MajorUpgrade DowngradeErrorMessage="Uma nova versão do [ProductName] já está instalada." />
+		<MediaTemplate EmbedCab="yes" />
+		
+		<Feature Id="ProductFeature" Title="SetupProxy" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+	
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="FATEC Proxy" />
+			</Directory>
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ApplicationProgramsFolder" Name="FATEC Proxy"/>
+			</Directory>
+			<Directory Id="DesktopFolder" SourceName="Desktop"/>
+		</Directory>
+		
+		<DirectoryRef Id="INSTALLFOLDER">
+			<Component Id="Exe" Guid="*">
+				<File Id="ProxyGui" Name="ProxyGui.exe" Source="$(var.ProxyGui.TargetPath)" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="CertificateFile" Guid="*">
+				<File Id="zscaler" Name="zscaler-root-2048.crt" Source="$(var.ProxyGui.TargetDir)\zscaler-root-2048.crt" KeyPath="yes" Checksum="yes" />
+			</Component>
+			<Component Id="RegistryLib" Guid="*">
+				<File Id="Registry" Name="PobreLibrary.Registry.dll" Source="$(var.PobreLibrary.Registry.TargetPath)" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="CertificateLib">
+				<File Id="Certificate" Name="PobreLibrary.Registry.Certificate.dll" Source="$(var.PobreLibrary.Registry.Certificate.TargetPath)" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="ProxyLib">
+				<File Id="Proxy" Name="PobreLibrary.Registry.Proxy.dll" Source="$(var.PobreLibrary.Registry.Proxy.TargetPath)" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="ConfigFile">
+				<File Id="Config" Name="Config.xml" Source="$(var.ProxyGui.TargetDir)\Config.xml" KeyPath="yes" Checksum="yes"/>
+			</Component>
+		</DirectoryRef>
+		
+		<DirectoryRef Id="INSTALLFOLDER">
+			<Component Id="ApplicationShortcut" Guid="*">
+				<Shortcut Id="ApplicationDesktopShortcut"
+					Name="FATEC Proxy"
+					Directory="DesktopFolder"
+					Description="Interface de Proxy"
+					Target="[INSTALLFOLDER]ProxyGui.exe"
+					WorkingDirectory="INSTALLFOLDER"/>
+				<RemoveFolder Id="ApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall"/>
+				<RegistryValue Root="HKCU" Key="Software\FATEC Proxy" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+			</Component>
+		</DirectoryRef>
+	</Fragment>
+	
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<ComponentRef Id="Exe"/>
+			<ComponentRef Id="RegistryLib"/>
+			<ComponentRef Id="CertificateLib"/>
+			<ComponentRef Id="ProxyLib"/>
+			<ComponentRef Id="CertificateFile"/>
+			<ComponentRef Id="ConfigFile"/>
+			<ComponentRef Id="ApplicationShortcut"/>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

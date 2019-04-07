@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+	x:Class="ProxyGui.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Interface de Proxy"
+	ResizeMode="NoResize"
+	SizeToContent="WidthAndHeight"
+	Icon="{StaticResource Icone}"
+	Closing="Window_Closing">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="20" />
+			<RowDefinition
+				Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition
+				Width="310" />
+		</Grid.ColumnDefinitions>
+		<Menu
+			Grid.Row="0"
+			HorizontalAlignment="Stretch">
+			<MenuItem
+				x:Name="MenuSobre"
+				Header="_Sobre"
+				Click="MenuSobre_Click" />
+		</Menu>
+		<ComboBox
+			Grid.Row="1"
+			x:Name="cbUrlLista"
+			Loaded="CarregarLista"
+			HorizontalAlignment="Left"
+			Width="170"
+			Margin="10,10,0,0"
+			SelectedValuePath="Content"
+			Height="23"
+			VerticalAlignment="Top"
+			SelectedIndex="0">
+			<!-- ComboBoxItem Content="189.8.69.42:80" HorizontalAlignment="Left"/>
+            <ComboBoxItem Content="wsg1.telefonica.com.br:80" HorizontalAlignment="Left"/ !-->
+		</ComboBox>
+		<Button
+			Grid.Row="1"
+			x:Name="btnHabilitar"
+			Content=""
+			Loaded="Button_Load"
+			VerticalAlignment="Top"
+			Height="23"
+			Click="btnHabilitar_Click"
+			Width="116"
+			HorizontalAlignment="Right"
+			Margin="0,10,10,0" />
+		<Button
+			Grid.Row="1"
+			x:Name="btnInstalar"
+			Content=""
+			Loaded="Button_Load"
+			Margin="10,40,10,10"
+			VerticalAlignment="Top"
+			Height="23"
+			Click="btnInstalar_Click" />
+	</Grid>
+</Window>

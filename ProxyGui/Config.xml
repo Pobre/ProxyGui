@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+	<IpList>
+		<Ip>189.8.69.42:80</Ip>
+		<Ip>wsg1.telefonica.com.br:80</Ip>
+	</IpList>
+</Config>
